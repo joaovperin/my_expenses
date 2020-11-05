@@ -7,12 +7,12 @@ class TransactionGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 80,
       child: Card(
-        child: Text('Gráfico'),
         elevation: 5,
+        child: Text('Gráfico'),
       ),
     );
   }

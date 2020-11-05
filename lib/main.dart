@@ -4,7 +4,7 @@ import 'package:my_expenses/constants/app.constants.dart';
 import 'components/transaction/transaction_graph.component.dart';
 import 'components/transaction/transaction_user.component.dart';
 
-main() {
+dynamic main() {
   runApp(MyExpensesApp());
 }
 
@@ -29,13 +29,15 @@ class MyHomePage extends StatelessWidget {
         title: Text(kAppTitle),
         backgroundColor: kAppPrimaryColor,
       ),
-      body: Column(
-        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          TransactionGraph(),
-          TransactionUser(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TransactionGraph(),
+            TransactionUser(),
+          ],
+        ),
       ),
     );
   }

@@ -1,17 +1,19 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:my_expenses/components/transaction/transaction_form.component.dart';
 import 'package:my_expenses/components/transaction/transaction_list.component.dart';
 import 'package:my_expenses/models/transaction.model.dart';
 
 class TransactionUser extends StatefulWidget {
-  TransactionUser({Key key}) : super(key: key);
+  const TransactionUser({Key key}) : super(key: key);
 
   @override
   _TransactionUserState createState() => _TransactionUserState();
 }
 
 class _TransactionUserState extends State<TransactionUser> {
-  final _transactions = [
+  final List<Transaction> _transactions = <Transaction>[
     Transaction(
       id: 't1',
       title: 'Novo Tênis de Corrida',
@@ -23,15 +25,43 @@ class _TransactionUserState extends State<TransactionUser> {
       title: 'Conta de luz',
       value: 211.30,
       date: DateTime.now(),
-    )
+    ),
+    Transaction(
+      id: 't3',
+      title: 'Conta #01',
+      value: 211.30,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't4',
+      title: 'Conta #02',
+      value: 211.30,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't5',
+      title: 'Conta #03',
+      value: 211.30,
+      date: DateTime.now(),
+    ),
   ];
+
+  void _addTransaction(String title, double value) {
+    final Transaction newTransaction = Transaction(
+      id: Random().nextDouble().toString(),
+      title: title,
+      value: value,
+      date: DateTime.now(),
+    );
+    setState(() => _transactions.add(newTransaction));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TransactionList(_transactions),
-        TransactionForm(),
+        TransactionForm(onSubmit: _addTransaction),
       ],
     );
   }

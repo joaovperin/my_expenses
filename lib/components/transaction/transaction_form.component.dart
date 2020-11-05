@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/utils/number-utils.dart';
 
 class TransactionForm extends StatelessWidget {
-  TransactionForm({Key key}) : super(key: key);
+  TransactionForm({Key key, this.onSubmit}) : super(key: key);
 
-  final titleCtrl = TextEditingController();
-  final valueCtrl = TextEditingController();
+  final void Function(String, double) onSubmit;
+
+  final TextEditingController titleCtrl = TextEditingController();
+  final TextEditingController valueCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +22,22 @@ class TransactionForm extends StatelessWidget {
               controller: titleCtrl,
             ),
             TextField(
-              decoration:
-                  InputDecoration(labelText: "Valor (${getCurrency()})"),
+              decoration: InputDecoration(
+                labelText: 'Valor (${getCurrency()})',
+              ),
               controller: valueCtrl,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 FlatButton(
-                  child: Text('Nova Transação'),
                   textColor: Colors.purple,
                   onPressed: () {
-                    print(
-                        "Title: ${titleCtrl.text} and Value ${fmtMoney(double.parse(valueCtrl.text))}");
-                    // _transactions.add(Transaction(
-                    //   id: 'new',
-                    //   title: titleCtrl.text.trim(),
-                    //   value: double.parse(valueCtrl.text.trim()),
-                    //   date: DateTime.now(),
-                    // ));
-                    // print("Title: ${titleCtrl.text} and Value ${fmtMoney(double.parse(valueCtrl.text))}");
+                    print("Title: ${titleCtrl.text} and Value ${fmtMoney(double.parse(valueCtrl.text))}");
+                    // Callback
+                    onSubmit.call(titleCtrl.text.trim(), double.tryParse(valueCtrl.text.trim()) ?? 0);
                   },
+                  child: Text('Nova Transação'),
                 ),
               ],
             ),
