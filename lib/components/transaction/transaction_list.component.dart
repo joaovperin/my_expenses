@@ -26,9 +26,9 @@ class TransactionList extends StatelessWidget {
                     vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: kAppPrimaryColor,
+                    color: kAppBackgroundColor,
                     border: Border.all(
-                      color: Colors.purple,
+                      color: kAppSecondColor,
                       width: 2,
                     ),
                   ),
@@ -38,7 +38,7 @@ class TransactionList extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.purple,
+                      color: kAppSecondColor,
                     ),
                   ),
                 ),
@@ -51,14 +51,12 @@ class TransactionList extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        color: Colors.black,
+                        color: kAppFocusedTextColor,
                       ),
                     ),
                     Text(
                       fmtDateTime(tr.date),
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
+                      style: TextStyle(color: kAppUnfocusedTextColor),
                     ),
                   ],
                 )

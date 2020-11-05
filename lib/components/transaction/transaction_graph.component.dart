@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/constants/app.constants.dart';
 
 class TransactionGraph extends StatelessWidget {
   const TransactionGraph({
@@ -12,7 +13,16 @@ class TransactionGraph extends StatelessWidget {
       height: 80,
       child: Card(
         elevation: 5,
-        child: Text('Gráfico'),
+        child: Container(
+          alignment: Alignment.center,
+          child: Text(
+            'Gráfico',
+            style: TextStyle(
+              fontSize: 30,
+              color: kAppUnfocusedTextColor
+            ),
+          ),
+        ),
       ),
     );
   }

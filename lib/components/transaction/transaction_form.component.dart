@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_expenses/constants/app.constants.dart';
 import 'package:my_expenses/utils/number-utils.dart';
 
 class TransactionForm extends StatelessWidget {
@@ -34,7 +35,7 @@ class TransactionForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 FlatButton(
-                  textColor: Colors.purple,
+                  textColor: kAppSecondColor,
                   onPressed: _onSubmit,
                   child: Text('Nova Transação'),
                 ),

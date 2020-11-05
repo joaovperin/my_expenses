@@ -14,8 +14,12 @@ class MyExpensesApp extends StatelessWidget {
     return MaterialApp(
       home: MyHomePage(),
       theme: ThemeData(
-        canvasColor: kAppPrimaryColor.withAlpha(100),
-        backgroundColor: Colors.pink,
+        canvasColor: kAppBackgroundColor,
+        backgroundColor: kAppBackgroundColor,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: kAppSecondColor,
+          foregroundColor: kAppBackgroundColor,
+        ),
       ),
     );
   }
@@ -28,6 +32,12 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(kAppTitle),
         backgroundColor: kAppPrimaryColor,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -38,6 +48,10 @@ class MyHomePage extends StatelessWidget {
             TransactionUser(),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }
