@@ -20,23 +20,22 @@ class TransactionForm extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: 'Título'),
               controller: titleCtrl,
+              onSubmitted: (_) => _onSubmit(),
             ),
             TextField(
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
                 labelText: 'Valor (${getCurrency()})',
               ),
               controller: valueCtrl,
+              onSubmitted: (_) => _onSubmit(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 FlatButton(
                   textColor: Colors.purple,
-                  onPressed: () {
-                    print('Title: ${titleCtrl.text} and Value ${fmtMoney(double.parse(valueCtrl.text))}');
-                    // Callback
-                    onSubmit.call(titleCtrl.text.trim(), double.tryParse(valueCtrl.text.trim()) ?? 0);
-                  },
+                  onPressed: _onSubmit,
                   child: Text('Nova Transação'),
                 ),
               ],
@@ -45,5 +44,15 @@ class TransactionForm extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onSubmit() {
+    final String title = titleCtrl.text.trim();
+    final double value = double.tryParse(valueCtrl.text.trim()) ?? 0;
+
+    if (title.isEmpty || value <= 0) {
+      return;
+    }
+    onSubmit.call(title, value);
   }
 }
