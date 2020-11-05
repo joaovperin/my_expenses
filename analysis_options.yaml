@@ -29,7 +29,9 @@ linter:
     #
     prefer_const_constructors: false
 
-    # prefer_const_constructors_in_immutables: true
+    file_names: false
+
+    prefer_const_constructors_in_immutables: true
 
     # Blindly follow the Flutter code style, which prefers types everywhere
     always_specify_types: true

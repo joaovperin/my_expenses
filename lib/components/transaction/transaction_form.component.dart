@@ -16,7 +16,7 @@ class TransactionForm extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
-          children: [
+          children: <Widget>[
             TextField(
               decoration: InputDecoration(labelText: 'Título'),
               controller: titleCtrl,
@@ -29,11 +29,11 @@ class TransactionForm extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
+              children: <Widget>[
                 FlatButton(
                   textColor: Colors.purple,
                   onPressed: () {
-                    print("Title: ${titleCtrl.text} and Value ${fmtMoney(double.parse(valueCtrl.text))}");
+                    print('Title: ${titleCtrl.text} and Value ${fmtMoney(double.parse(valueCtrl.text))}');
                     // Callback
                     onSubmit.call(titleCtrl.text.trim(), double.tryParse(valueCtrl.text.trim()) ?? 0);
                   },

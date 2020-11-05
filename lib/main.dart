@@ -33,7 +33,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+          children: const <Widget>[
             TransactionGraph(),
             TransactionUser(),
           ],
