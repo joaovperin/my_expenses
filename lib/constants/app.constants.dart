@@ -7,7 +7,7 @@ const String kAppTitle = 'MyExpenses';
 
 // App colors
 const Color kAppPrimaryColor = Color.fromARGB(255, 166, 49, 186);
-const Color kAppSecondColor = Color.fromARGB(255, 255, 255, 255);
+const Color kAppAccentColor = Color.fromARGB(255, 255, 255, 255);
 const Color kAppBackgroundColor = Color.fromARGB(255, 166, 49, 186);
 
 // Text colors

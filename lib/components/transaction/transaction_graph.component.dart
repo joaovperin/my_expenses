@@ -19,7 +19,7 @@ class TransactionGraph extends StatelessWidget {
             'Gráfico',
             style: TextStyle(
               fontSize: 30,
-              color: kAppUnfocusedTextColor
+              color: Theme.of(context).unselectedWidgetColor,
             ),
           ),
         ),

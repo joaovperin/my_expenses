@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:my_expenses/components/transaction/transaction_form.component.dart';
 import 'package:my_expenses/constants/app.constants.dart';
 
 import 'components/transaction/transaction_graph.component.dart';
-import 'components/transaction/transaction_user.component.dart';
+import 'components/transaction/transaction_list.component.dart';
+import 'models/transaction.model.dart';
 
 dynamic main() {
   runApp(MyExpensesApp());
@@ -14,10 +18,26 @@ class MyExpensesApp extends StatelessWidget {
     return MaterialApp(
       home: MyHomePage(),
       theme: ThemeData(
+        primarySwatch: MaterialColor(
+          kAppPrimaryColor.value,
+          const <int, Color>{
+            50: kAppPrimaryColor,
+            100: kAppPrimaryColor,
+            200: kAppPrimaryColor,
+            300: kAppPrimaryColor,
+            400: kAppPrimaryColor,
+            500: kAppPrimaryColor,
+            600: kAppPrimaryColor,
+            700: kAppPrimaryColor,
+            800: kAppPrimaryColor,
+            900: kAppPrimaryColor,
+          },
+        ),
         canvasColor: kAppBackgroundColor,
         backgroundColor: kAppBackgroundColor,
+        accentColor: kAppAccentColor,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: kAppSecondColor,
+          backgroundColor: kAppAccentColor,
           foregroundColor: kAppBackgroundColor,
         ),
       ),
@@ -25,7 +45,47 @@ class MyExpensesApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Transaction> _transactions = <Transaction>[
+    Transaction(
+      id: 't1',
+      title: 'Novo Tênis de Corrida',
+      value: 310.76,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de luz',
+      value: 211.30,
+      date: DateTime.now(),
+    ),
+  ];
+
+  void _addTransaction(String title, double value) {
+    final Transaction newTransaction = Transaction(
+      id: Random().nextDouble().toString(),
+      title: title,
+      value: value,
+      date: DateTime.now(),
+    );
+    setState(() => _transactions.add(newTransaction));
+    Navigator.of(context).pop();
+  }
+
+  void _openTransactionFormModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return TransactionForm(onSubmit: _addTransaction);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,24 +95,24 @@ class MyHomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () => _openTransactionFormModal(context),
           )
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const <Widget>[
+          children: <Widget>[
             TransactionGraph(),
-            TransactionUser(),
+            TransactionList(_transactions),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => _openTransactionFormModal(context),
         child: Icon(Icons.add),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

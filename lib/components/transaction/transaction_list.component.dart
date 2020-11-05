@@ -12,7 +12,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
+      height: 500,
       child: ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (BuildContext context, int index) {
@@ -26,9 +26,9 @@ class TransactionList extends StatelessWidget {
                     vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: kAppBackgroundColor,
+                    color: Theme.of(context).backgroundColor,
                     border: Border.all(
-                      color: kAppSecondColor,
+                      color: Theme.of(context).accentColor,
                       width: 2,
                     ),
                   ),
@@ -38,7 +38,7 @@ class TransactionList extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: kAppSecondColor,
+                      color: Theme.of(context).accentColor,
                     ),
                   ),
                 ),
@@ -51,12 +51,12 @@ class TransactionList extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        color: kAppFocusedTextColor,
+                        color: Theme.of(context).shadowColor,
                       ),
                     ),
                     Text(
                       fmtDateTime(tr.date),
-                      style: TextStyle(color: kAppUnfocusedTextColor),
+                      style: TextStyle(color: Theme.of(context).unselectedWidgetColor),
                     ),
                   ],
                 )
