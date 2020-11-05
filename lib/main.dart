@@ -34,6 +34,7 @@ class MyExpensesApp extends StatelessWidget {
           },
         ),
         canvasColor: kAppBackgroundColor,
+        fontFamily: 'Quicksand',
         backgroundColor: kAppBackgroundColor,
         accentColor: kAppAccentColor,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -52,18 +53,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = <Transaction>[
-    Transaction(
-      id: 't1',
-      title: 'Novo Tênis de Corrida',
-      value: 310.76,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de luz',
-      value: 211.30,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Novo Tênis de Corrida',
+    //   value: 310.76,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta de luz',
+    //   value: 211.30,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   void _addTransaction(String title, double value) {
