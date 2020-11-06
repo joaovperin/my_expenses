@@ -26,51 +26,49 @@ class TransactionList extends StatelessWidget {
         final Transaction tr = transactions[index];
         return Dismissible(
           key: Key(tr.id),
-          onDismissed: (direction) => onItemDismiss.call(tr),
+          onDismissed: (DismissDirection direction) => onItemDismiss.call(tr),
           child: Card(
-            child: Row(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).backgroundColor,
-                    border: Border.all(
-                      color: Theme.of(context).accentColor,
-                      width: 2,
-                    ),
-                  ),
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    fmtMoney(tr.value),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Theme.of(context).accentColor,
-                    ),
+            child: ListTile(
+              leading: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).backgroundColor,
+                  border: Border.all(
+                    color: Theme.of(context).accentColor,
+                    width: 2,
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      tr.title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Theme.of(context).shadowColor,
-                      ),
-                    ),
-                    Text(
-                      fmtDateTime(tr.date),
-                      style: TextStyle(color: Theme.of(context).unselectedWidgetColor),
-                    ),
-                  ],
-                )
-              ],
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  fmtMoney(tr.value),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+              ),
+              title: Text(
+                tr.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Theme.of(context).shadowColor,
+                ),
+              ),
+              subtitle: Text(
+                fmtDateTime(tr.date),
+                style: TextStyle(color: Theme.of(context).unselectedWidgetColor),
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    color: Theme.of(context).errorColor,
+                    onPressed: () => onItemDismiss.call(tr),
+                  ),
+                ],
+              ),
             ),
           ),
         );

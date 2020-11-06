@@ -14,31 +14,49 @@ class TransactionChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text(getCurrency()),
-        SizedBox(height: 4),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.purple[300], //TODO: fix color
-            borderRadius: _buildBorderRadius(),
+        SizedBox(
+          width: 18,
+          child: FittedBox(
+            child: Text(getCurrency()),
           ),
-          height: kContainerSize,
-          child: Column(children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.blue[100], //TODO: fix color
-                borderRadius: _buildBorderRadius(),
-              ),
-              child: SizedBox(width: 16, height: calcItemHeight()),
+        ),
+        SizedBox(height: 4),
+        Tooltip(
+          message: fmtMoney(value),
+          child: SizedBox(
+            height: kContainerSize,
+            width: 16,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue[100], //TODO: fix color
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                  ),
+                ),
+                FractionallySizedBox(
+                  heightFactor: percentage / 100,
+                  widthFactor: .9,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.purple[300], //TODO: fix color
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 2,
+                )
+              ],
             ),
-          ]),
+          ),
         ),
         SizedBox(height: 4),
         Text(label),
       ],
     );
   }
-
-  BorderRadius _buildBorderRadius() => BorderRadius.vertical(top: Radius.circular(6));
-
-  double calcItemHeight() => kContainerSize - ((kContainerSize * percentage) / 100);
 }

@@ -41,6 +41,14 @@ class MyExpensesApp extends StatelessWidget {
         fontFamily: 'Quicksand',
         backgroundColor: kAppBackgroundColor,
         accentColor: kAppAccentColor,
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline6: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              button: TextStyle(),
+            ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: kAppAccentColor,
           foregroundColor: kAppBackgroundColor,
@@ -69,17 +77,39 @@ class _MyHomePageState extends State<MyHomePage> {
       value: 211.30,
       date: DateTime.now(),
     ),
+    Transaction(
+      id: 't3',
+      title: 'Cartão de crédito',
+      value: 930.62,
+      date: DateTime.now().subtract(Duration(days: 5)),
+    ),
+    Transaction(
+      id: 't4',
+      title: 'Xizão',
+      value: 17.90,
+      date: DateTime.now().subtract(Duration(days: 4)),
+    ),
+    Transaction(
+      id: 't5',
+      title: 'Açaí',
+      value: 12.00,
+      date: DateTime.now().subtract(Duration(days: 2)),
+    ),
   ];
 
-  void _addTransaction(String title, double value) {
+  void _addTransaction(String title, double value, DateTime dateTime) {
     final Transaction newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: dateTime,
     );
     setState(() => _transactions.add(newTransaction));
     Navigator.of(context).pop();
+  }
+
+  void _removeTransaction(Transaction tr) {
+    setState(() => _transactions.remove(tr));
   }
 
   void _openTransactionFormModal(BuildContext context) {
@@ -109,9 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
           TransactionChart(_transactions),
           TransactionList(
             _transactions,
-            onItemDismiss: (Transaction tr) {
-              setState(() => _transactions.remove(tr));
-            },
+            onItemDismiss: _removeTransaction,
           ),
         ],
       ),

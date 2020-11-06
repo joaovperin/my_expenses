@@ -14,7 +14,7 @@ class TransactionChart extends StatefulWidget {
 }
 
 class _TransactionChartState extends State<TransactionChart> {
-  List<TransactionChartBar> get groupedTransactions {
+  List<Widget> get groupedTransactions {
     double allElementsSum = 0.000;
 
     final List<Map<String, Object>> list = List<Map<String, Object>>.generate(7, (int index) {
@@ -41,7 +41,10 @@ class _TransactionChartState extends State<TransactionChart> {
       final String dayOfWeek = e['day'].toString();
       final double value = double.tryParse(e['value'].toString()) ?? 0;
       final double percentage = allElementsSum > 0 ? ((value / allElementsSum) * 100) : 0;
-      return TransactionChartBar(label: dayOfWeek, value: value, percentage: percentage);
+      return Flexible(
+        fit: FlexFit.tight,
+        child: TransactionChartBar(label: dayOfWeek, value: value, percentage: percentage),
+      );
     }).toList();
   }
 
@@ -65,7 +68,7 @@ class _TransactionChartState extends State<TransactionChart> {
             ),
             Card(
               elevation: 6,
-              margin: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 14),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: groupedTransactions,
