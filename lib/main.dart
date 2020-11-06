@@ -107,7 +107,12 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: <Widget>[
           TransactionChart(_transactions),
-          TransactionList(_transactions),
+          TransactionList(
+            _transactions,
+            onItemDismiss: (Transaction tr) {
+              setState(() => _transactions.remove(tr));
+            },
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

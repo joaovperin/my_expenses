@@ -4,7 +4,9 @@ import 'package:my_expenses/utils/date-utils.dart';
 import 'package:my_expenses/utils/number-utils.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList(this.transactions, {Key key}) : super(key: key);
+  const TransactionList(this.transactions, {Key key, this.onItemDismiss}) : super(key: key);
+
+  final void Function(Transaction) onItemDismiss;
 
   final List<Transaction> transactions;
 
@@ -22,50 +24,54 @@ class TransactionList extends StatelessWidget {
       itemCount: transactions.length,
       itemBuilder: (BuildContext context, int index) {
         final Transaction tr = transactions[index];
-        return Card(
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                  border: Border.all(
-                    color: Theme.of(context).accentColor,
-                    width: 2,
+        return Dismissible(
+          key: Key(tr.id),
+          onDismissed: (direction) => onItemDismiss.call(tr),
+          child: Card(
+            child: Row(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 10,
                   ),
-                ),
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  fmtMoney(tr.value),
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    tr.title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Theme.of(context).shadowColor,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).backgroundColor,
+                    border: Border.all(
+                      color: Theme.of(context).accentColor,
+                      width: 2,
                     ),
                   ),
-                  Text(
-                    fmtDateTime(tr.date),
-                    style: TextStyle(color: Theme.of(context).unselectedWidgetColor),
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    fmtMoney(tr.value),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Theme.of(context).accentColor,
+                    ),
                   ),
-                ],
-              )
-            ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      tr.title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Theme.of(context).shadowColor,
+                      ),
+                    ),
+                    Text(
+                      fmtDateTime(tr.date),
+                      style: TextStyle(color: Theme.of(context).unselectedWidgetColor),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         );
       },
