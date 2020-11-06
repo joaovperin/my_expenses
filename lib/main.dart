@@ -1,14 +1,18 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:my_expenses/components/transaction/transaction_form.component.dart';
 import 'package:my_expenses/constants/app.constants.dart';
 
-import 'components/transaction/transaction_graph.component.dart';
+import 'components/transaction/transaction_chart.component.dart';
 import 'components/transaction/transaction_list.component.dart';
 import 'models/transaction.model.dart';
 
-dynamic main() {
+dynamic main() async {
+  Intl.defaultLocale = 'pt_BR';
+  await initializeDateFormatting();
   runApp(MyExpensesApp());
 }
 
@@ -53,18 +57,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = <Transaction>[
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo Tênis de Corrida',
-    //   value: 310.76,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Conta de luz',
-    //   value: 211.30,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't1',
+      title: 'Novo Tênis de Corrida',
+      value: 310.76,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de luz',
+      value: 211.30,
+      date: DateTime.now(),
+    ),
   ];
 
   void _addTransaction(String title, double value) {
@@ -100,14 +104,11 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            TransactionGraph(),
-            TransactionList(_transactions),
-          ],
-        ),
+      body: Column(
+        children: <Widget>[
+          TransactionChart(_transactions),
+          TransactionList(_transactions),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _openTransactionFormModal(context),

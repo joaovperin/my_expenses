@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_expenses/constants/app.constants.dart';
 import 'package:my_expenses/utils/number-utils.dart';
 
 class TransactionForm extends StatefulWidget {
@@ -19,7 +18,7 @@ class _TransactionFormState extends State<TransactionForm> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
