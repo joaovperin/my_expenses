@@ -47,7 +47,9 @@ class MyExpensesApp extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
-              button: TextStyle(),
+              button: TextStyle(
+                color: kAppPrimaryColor
+              ),
             ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: kAppAccentColor,
